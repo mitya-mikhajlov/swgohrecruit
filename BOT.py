@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import os
 
 
 class MyClient(discord.Client):
@@ -22,8 +23,10 @@ class MyClient(discord.Client):
                                '    — приглашения в гильдии удаляются при достижении 7-дневного возраста;\n'
                                '    — посты в канале для десанта удаляются при достижении 14-дневного возраста;\n'
                                '    — приглашения в альянсы удаляются при достижении 30-дневного возраста')
-            await asyncio.sleep(259200)
+            days = os.environ.get('DAYS')
+            await asyncio.sleep(int(days) * 86400)
 
 
 client = MyClient()
-client.run('NjgyNTU2OTUzMjE3NTk3NDQw.XlfIpg.AZf3o3_tVc-OL784vmP-XwiEEOo')
+token = os.environ.get('BOT_TOKEN')
+client.run(str(token))
